@@ -6,16 +6,20 @@ def fibonacci(n,m)
   fail ArgumentError, "# numbers must be greater than 0" if n.zero? || m.zero?
 
   # array takes a range of 1 to m minus the sum inject performs as it takes the first element 
-  # in the range and uses that as the base 'sum'. 
+  # in the range and uses that as the base 'sum'.
   # It then takes the next element "m" and then adds them together
-  array = (1..m - 2).inject( [0, 1] ) { | fib | fib << fib.last(2).inject(:+) }
-  sub_array = array[n-1..m-1]
-  sum_array = sub_array.sum 
-  sum_array % 10
-  # sum_array
-end
+  array = (1..m - 2).inject( [0, 1] ) { | fibonnaci | fibonnaci << fibonnaci.last(2).inject(:+) }
 
-p fibonacci(0, 8)
+  # once we have "array" as the representation of the fibonacci sequence we extract the sequence
+  # into a sub_array where we want to find their index therefore we substract one for the index
+  sub_array = array[n-1..m-1]
+
+  # as per instructions we add the numbers in sub_array to get the sum Fm + Fm+1 … + Fn
+  sum_array = sub_array.sum
+
+  # to get the last digit we apply module to the number
+  return sum_array % 10
+end
 
 # p fibonacci(3,7)
 # p fibonacci(10,10)
